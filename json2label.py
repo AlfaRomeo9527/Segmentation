@@ -9,11 +9,9 @@ import PIL.Image
 import yaml
 
 from labelme import utils
-###############################################增加的语句,改下路径即可##############################
 import glob
 
 
-###############################################   end    ##################################
 
 
 def json2label(json_folder):
@@ -46,13 +44,7 @@ def json2label(json_folder):
         img = utils.img_b64_to_arr(imageData)
 
         label_name_to_value = {'_background_': 0, '1': 1, '2': 2, '3': 3}
-        # for shape in sorted(data['shapes'], key=lambda x: x['label']):
-        #     label_name = shape['label']
-        #     if label_name in label_name_to_value:
-        #         label_value = label_name_to_value[label_name]
-        #     else:
-        #         label_value = len(label_name_to_value)
-        #         label_name_to_value[label_name] = label_value
+
         lbl = utils.shapes_to_label(img.shape, data['shapes'], label_name_to_value)
 
         label_names = [None] * (max(label_name_to_value.values()) + 1)
